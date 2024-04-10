@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta charset="UTF-8">
         <script src="js/products.js"></script>
         <script src="js/register.js"></script>
         <script src="js/introspeccio.js"></script>
@@ -9,7 +10,7 @@
 
             function getProductesFromServer() {
 
-                fetch('llistatProductes.php')
+                fetch('llistatProductes-data.php')
                 .then(response => {
                     if (!response.ok) {
                     throw new Error('No hi ha productes');
@@ -39,9 +40,9 @@
     <body>
         <img width="200px" src="//www.sarti.webs.upc.edu/moodle/pluginfile.php/1/theme_klass/logo/1515671862/Logo%20Sarti%20blanc2.svg" alt="Formació Sarti">
         <img width="200px" src="https://www.sarti.webs.upc.edu/web_v2/assets/onepage/img/logo/upc.png" alt="Formació Sarti">
+        <a href="">Login</a>&nbsp;<a href="">Registre</a>
         
-        
-        <form id="login" method="POST" action="/login.php">            
+        <!--form id="login" method="POST" action="/login.php">            
             <p>username: <input type="text" name="name">
             <p>paraula de pas: <input type="password" name="password">
             <p><input type="submit" name="enviar" value="enviar"></p>
@@ -74,7 +75,7 @@
             <p><input type="checkbox" name="politiques">Acceptes les polítiques</p> 
     
                 <p><input type="submit" name="enviar" value="enviar"></p>
-        </form>
+        </form-->
 
         <hr>
 
@@ -95,7 +96,7 @@
 
             </form>
             <hr>
-            <a onclick="getProductesFromServer()" href="#">obtenir productes</a>
+            <a onclick="getProductesFromServer()" href="#">obtenir productes</a>&nbsp;&nbsp;&nbsp;<a href="llistatProductes.php">obtenir productes-NOVA-PÀGINA</a>
             <hr>
             <p><a href="#" onclick="javascript:ordenaPerNom()">[Ordena Nom]</a>&nbsp;<a href="#"  onclick="javascript:ordenaPerCategoria()">[Ordena per Categoria]</a>&nbsp;<a href="#"  onclick="javascript:ordenaPerPreu()">[Ordena per preu]</a>
                 <p><a href="#"  onclick="javascript:filtraPer('')">[Tots]</a><a href="#"  onclick="javascript:filtraPer('peixos')">[Filtra per Peixos]</a>&nbsp;<a href="#"  onclick="javascript:filtraPer('carns')">[Filtra per carns]</a>&nbsp;<a href="#"  onclick="javascript:filtraPer('fruites')">[Filtra per fruites]</a>

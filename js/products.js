@@ -115,7 +115,7 @@ function escriureTaula(products) {
         i++;
     });
 
-    document.getElementById("tauladeProductes").innerHTML+=theTable;
+    document.getElementById("tauladeProductes").innerHTML=theTable;
 }
 /*
 function escriureTaula(products) {
