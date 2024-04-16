@@ -3,10 +3,64 @@
         <meta charset="UTF-8">
         <script src="js/products.js"></script>
         <script src="js/register.js"></script>
-        <script src="js/introspeccio.js"></script>
         
         <script>
             let products = [];
+
+            function updateSubCategory(category) {
+                let selected = category.value;
+                var subcategoryTag = window.document.forms[0].elements["subcategory"];
+                
+                console.log("subcategory", subcategoryTag);
+                if (selected == -1) return true;
+
+                fetch('categories-data.php?category='+selected)
+                .then(response => {
+                    if (!response.ok) {
+                    throw new Error('No hi ha productes');
+                    }
+                    return response.json();
+                }).
+                then(data => {
+                    if (data!=null) {
+                        subcategories = data; 
+                        console.log("subcategories", subcategories);
+                        subcategoryTag.innerHTML = '';
+                        console.log("subcategories", subcategories.subcategory);
+                        subcategories.subcategory.forEach(function(elem) {
+
+
+                            console.log("select", element);
+
+
+                            let option = document.createElement("option");
+                            option.value = 1; //_elem.id;
+                            option.text = "peixos"; //elem.name;
+                            subcategoryTag.appendChild(option);
+
+                            let option2 = document.createElement("option");
+                    
+                            option2.value = 2; //_elem.id;
+                            option2.text = "fruites"; //elem.name;
+                            subcategoryTag.appendChild(option2);
+
+
+
+
+
+
+
+
+
+                        })
+                    }    
+                })
+                .catch(error => {
+                    console.error('Error al rebre la llista de subcategories:', error);
+                    });
+                
+            }
+
 
             function getProductesFromServer() {
 
@@ -26,6 +80,12 @@
                 .catch(error => {
                     console.error('Error al rebre la llista de productes:', error);
                 });
+            }
+
+            function validateForm(form) {
+                alert("The form was submitted");
+                console.log(form);
+                return false;
             }
 
 
@@ -80,23 +140,31 @@
         <hr>
 
 
-            <form id="altaProducte" method="POST" action="afegeixProducte.php">
+            <form id="altaProducte" method="POST" action="afegeixProducte.php" onSubmit="return validateForm(this)">
                 <input type="hidden" name="id" value="-1">
                 <input type="hidden" name="operation" value="add">
                 <!--input type="hidden" name="operacio" value="update"-->
                 
-                <p>Nom: <input type="text" name="name" value="MANDARINES">
-                <p>Categoria: <select name="category">
-                            <option value="peix">Peix</option>
-                            <option value="carn">Carn</option>
-                            <option value="fruita">Fruita</option>
+                <p>Nom: <input type="text" name="name" value="">
+                <p>Categoria: <select name="category" onchange="updateSubCategory(this)">
+                            <option value="-1">- Selecciona un valor -</option>
+                            <option value="1">Frescos</option>
+                            <option value="2">Refrigerados</option>
+                            <option value="3">Bodega</option>
                             </select>
+                <p>Subcategoria: <select name="subcategory">
+                                <option value="frescos">Frutas</option>
+                                <option value="refrigerados">Verduras y hortalizas</option>
+                                <option value="pescado">Pescado fresco</option>
+                                <option value="vacuno">Vacuno</option>
+                                </select>
+                                
                 <p>Preu: <input type="number" name="price">
                 <p><input type="submit" name="enviar" value="enviar"></p>
 
             </form>
             <hr>
-            <a onclick="getProductesFromServer()" href="#">obtenir productes</a>&nbsp;&nbsp;&nbsp;<a href="llistatProductes.php">obtenir productes-NOVA-PÀGINA</a>
+            <a onclick="getProductesFromServer()" href="#">obtenir productes</a>&nbsp;&nbsp;<a href="llistatProductes.php" target="_blank">obtenir productes-NOVA-PÀGINA</a>
             <hr>
             <p><a href="#" onclick="javascript:ordenaPerNom()">[Ordena Nom]</a>&nbsp;<a href="#"  onclick="javascript:ordenaPerCategoria()">[Ordena per Categoria]</a>&nbsp;<a href="#"  onclick="javascript:ordenaPerPreu()">[Ordena per preu]</a>
                 <p><a href="#"  onclick="javascript:filtraPer('')">[Tots]</a><a href="#"  onclick="javascript:filtraPer('peixos')">[Filtra per Peixos]</a>&nbsp;<a href="#"  onclick="javascript:filtraPer('carns')">[Filtra per carns]</a>&nbsp;<a href="#"  onclick="javascript:filtraPer('fruites')">[Filtra per fruites]</a>
