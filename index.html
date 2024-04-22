@@ -83,9 +83,9 @@
             }
 
             function validateForm(form) {
-                alert("The form was submitted");
+               // alert("The form was submitted");
                 console.log(form);
-                return false;
+                return true;
             }
 
 
@@ -140,7 +140,7 @@
         <hr>
 
 
-            <form id="altaProducte" method="POST" action="afegeixProducte.php" onSubmit="return validateForm(this)">
+            <form id="altaProducte" method="POST" action="afegeixProducte.php" enctype="multipart/form-data" onSubmit="return validateForm(this)">
                 <input type="hidden" name="id" value="-1">
                 <input type="hidden" name="operation" value="add">
                 <!--input type="hidden" name="operacio" value="update"-->
@@ -160,11 +160,12 @@
                                 </select>
                                 
                 <p>Preu: <input type="number" name="price">
+                <p>Imatge: <input type="file" name="imatge"></p>
                 <p><input type="submit" name="enviar" value="enviar"></p>
 
             </form>
             <hr>
-            <a onclick="getProductesFromServer()" href="#">obtenir productes</a>&nbsp;&nbsp;<a href="llistatProductes.php" target="_blank">obtenir productes-NOVA-PÀGINA</a>
+            <a onclick="getProductesFromServer()" href="#">obtenir productes</a>&nbsp;&nbsp;<a href="llistatProductes.php" target="_blank">obtenir productes-NOVA-PÀGINA</a>&nbsp;<a href="categories-data.php?category=1">Productes Frescos.json </a>&nbsp;<a href="generateXSL.php">PDF Generat al Vol</a>&nbsp;<a href="dummy.pdf">PDF Dummy</a>&nbsp;<a href="download.php">Descarrega PDF</a>
             <hr>
             <p><a href="#" onclick="javascript:ordenaPerNom()">[Ordena Nom]</a>&nbsp;<a href="#"  onclick="javascript:ordenaPerCategoria()">[Ordena per Categoria]</a>&nbsp;<a href="#"  onclick="javascript:ordenaPerPreu()">[Ordena per preu]</a>
                 <p><a href="#"  onclick="javascript:filtraPer('')">[Tots]</a><a href="#"  onclick="javascript:filtraPer('peixos')">[Filtra per Peixos]</a>&nbsp;<a href="#"  onclick="javascript:filtraPer('carns')">[Filtra per carns]</a>&nbsp;<a href="#"  onclick="javascript:filtraPer('fruites')">[Filtra per fruites]</a>
