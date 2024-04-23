@@ -1,5 +1,11 @@
 <?php
-$theFolder = "/tmp";
+$theFolder = $_GET['theFolder'];
+if (!isset($theFolder)) {
+    $theFolder = "/Applications/XAMPP/xamppfiles/htdocs/";
+}
+?>
+<H1><?=$theFolder?></H1>
+<?php
 if (is_dir($theFolder)){
   if ($gestor = opendir($theFolder)){
 
@@ -10,15 +16,26 @@ if (is_dir($theFolder)){
 
 <?php
     while (($theFile = readdir($gestor)) !== false){
-        $info = pathinfo($theFile);
-        //print_r($info);
-        $name = $info['basename'];
-        $ext = $info['extension'];
-        $size = filesize($theFile);
-        $lastDate = date("Y-m-d", filemtime($theFile));
-        ?>
-        <TR><TD><?=$name?></TD><TD><?=$ext?></TD><TD><?=$size?></TD><TD><?=$lastDate?></TD>
-        <?php
+        if (!($theFile=="." || $theFile=="..")) {
+
+            $info = pathinfo($theFile);
+            $name = $info['basename'];
+            $ext = $info['extension'];
+            $size = filesize($theFile);
+            $lastDate = date("Y-m-d", filemtime($theFile));
+            if (is_dir($theFolder.$theFile)) {
+            ?>
+                <TR><TD><a href="listDir.php?theFolder=<?=$theFolder.$theFile?>/">
+                <?=$name?></a></TD><TD><?=$ext?></TD><TD><?=$size?></TD><TD><?=$lastDate?></TD>
+            <?php
+            }
+            else {
+            ?>
+            <TR><TD><?=$name?></TD><TD><?=$ext?></TD><TD><?=$size?></TD><TD><?=$lastDate?></TD>
+
+            <?php
+            }
+        }
     }
     ?>
     </TR>
