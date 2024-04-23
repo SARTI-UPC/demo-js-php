@@ -21,8 +21,8 @@ if (is_dir($theFolder)){
             $info = pathinfo($theFile);
             $name = $info['basename'];
             $ext = $info['extension'];
-            $size = filesize($theFile);
-            $lastDate = date("Y-m-d", filemtime($theFile));
+            $size = filesize($theFolder.$theFile);
+            $lastDate = date("Y-m-d", filemtime($theFolder.$theFile));
             if (is_dir($theFolder.$theFile)) {
             ?>
                 <TR><TD><a href="listDir.php?theFolder=<?=$theFolder.$theFile?>/">
