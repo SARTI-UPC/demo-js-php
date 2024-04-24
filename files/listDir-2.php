@@ -69,11 +69,12 @@ if (is_dir($theFolder)){
             $info = pathinfo($theFile);
             $name = $info['basename'];
             $ext = $info['extension'];
-            $size = filesize($theFolder.$theFile);
-            $lastDate = date("Y-m-d", filemtime($theFolder.$theFile));
-            if (is_dir($theFolder.$theFile)) {
+            $fullName = $theFolder."/".$theFile;
+            $size = filesize($fullName);
+            $lastDate = date("Y-m-d", filemtime($fullName));
+            if (is_dir($fullName)) {
             ?>
-                <TR><TD><a href="listDir.php?theFolder=<?=$theFolder.$theFile?>/">
+                <TR><TD><a href="listDir.php?theFolder=<?=$fullName?>/">
                 <?=$name?></a></TD><TD><?=$ext?></TD><TD><?=$size?></TD><TD><?=$lastDate?></TD>
             <?php
             }
