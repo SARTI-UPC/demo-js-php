@@ -74,7 +74,7 @@ if (is_dir($theFolder)){
             $lastDate = date("Y-m-d", filemtime($fullName));
             if (is_dir($fullName)) {
             ?>
-                <TR><TD><a href="listDir.php?theFolder=<?=$fullName?>/">
+                <TR><TD><a href="listDir-2.php?theFolder=<?=$fullName?>/">
                 <?=$name?></a></TD><TD><?=$ext?></TD><TD><?=$size?></TD><TD><?=$lastDate?></TD>
             <?php
             }
