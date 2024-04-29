@@ -10,4 +10,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo "Operació només disponible per el mètode 'POST'.";
 }
-?>
+?> 

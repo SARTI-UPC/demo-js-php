@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar archivo</title>
+    <link rel="stylesheet" href="css/dragNDrop.css"> 
+
+</head>
+<body>
+    <h2>Enviar Archivo</h2>
+    <div id="drop-area" ondrop="handleDrop(event)" ondragover="allowDrop(event)">Agafa i deixa els teus arxius aquí</div>
+
+    <script>
+         function handleDrop(event) {
+            event.preventDefault();
+            var theFile = event.dataTransfer.files[0];
+            sendFile(theFile);
+        }
+
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function sendFile(theFile) {
+            var formData = new FormData();
+            formData.append('file', theFile);
+
+            fetch('uploadFile.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error("Error en l'enviament de l'arxiu:", error);
+            });
+        }
+    </script>
+
+</body>
+</html>

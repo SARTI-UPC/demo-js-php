@@ -1,0 +1,13 @@
+#drop-area {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    width: 300px;
+    margin: 50px auto;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  #drop-area.dragover {
+    background: #e1e1e1;
+  }
+  
