@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="area-drop" ondrop="drop(event)" ondragover="allowdrop(event)" style="width: 400px; height: 200px; border:1px dashed blue;"></div>
+    <p id="mensaje"></p>
+</body>
+<script>
+function allowdrop(event){
+    event.preventDefault()
+}
+
+function drop(event){
+    event.preventDefault()
+    const files = event.dataTransfer.files
+    sendFile(files)
+}
+
+function sendFile(files){
+    var dataSend = new FormData()
+    dataSend.append('nom','ikarm')
+   // dataSend.append('archivo', files)
+
+    for (let i = 0; i < files.length; i++) {
+        dataSend.append("archivo[]", files[i]);
+    }
+
+    fetch('uploadDragFile.php',{
+        method: 'POST',
+        body: dataSend
+    })
+    .then(response => response.json()) // o response.text()
+    .then(data =>{
+       // data.error asi como se accede al error del json
+        document.getElementById("mensaje").innerHTML = data.msg //el mensaje se obtiene del json generado por el archivo uploadDragFile
+
+       // document.getElementById("mensaje").innerHTML = data (si la respues del archivo uploadDragFile es solo texto (echo "OK")
+    })
+    .catch(error =>{
+        console.log(error)
+    })
+}
+
+</script>
+</html>
